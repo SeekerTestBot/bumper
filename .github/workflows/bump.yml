@@ -2,6 +2,8 @@ name: Bump
 
 on:
   workflow_dispatch:
+    inputs:
+      formula:
 
 jobs:
   bump:
@@ -14,6 +16,4 @@ jobs:
         continue-on-error: true
         with:
           token: ${{secrets.TOKEN}}
-          livecheck: true
-        env:
-          HOMEBREW_LIVECHECK_WATCHLIST: formulae
+          formula: ${{github.event.inputs.formula}}
