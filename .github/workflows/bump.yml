@@ -3,6 +3,7 @@ name: Bump
 on:
   workflow_dispatch:
     inputs:
+      tap:
       formula:
 
 jobs:
@@ -16,4 +17,5 @@ jobs:
         continue-on-error: true
         with:
           token: ${{secrets.TOKEN}}
+          tap: ${{github.event.inputs.tap}}
           formula: ${{github.event.inputs.formula}}
