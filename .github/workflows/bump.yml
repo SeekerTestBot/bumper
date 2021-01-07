@@ -5,6 +5,8 @@ on:
     inputs:
       tap:
       formula:
+      livecheck:
+        default: true
 
 jobs:
   bump:
@@ -19,3 +21,4 @@ jobs:
           token: ${{secrets.TOKEN}}
           tap: ${{github.event.inputs.tap}}
           formula: ${{github.event.inputs.formula}}
+          livecheck: ${{github.event.inputs.livecheck}}
