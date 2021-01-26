@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tap:
+        default: homebrew/cask
       cask:
       tag:
       livecheck:
