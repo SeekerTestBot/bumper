@@ -6,7 +6,7 @@ on:
       tap:
         default: homebrew/cask
       cask:
-      tag:
+      version:
       livecheck:
         default: false
 
@@ -23,5 +23,5 @@ jobs:
           token: ${{secrets.TOKEN}}
           tap: ${{github.event.inputs.tap}}
           cask: ${{github.event.inputs.cask}}
-          tag: ${{github.event.inputs.tag}}
+          version: ${{github.event.inputs.version}}
           livecheck: ${{github.event.inputs.livecheck}}
