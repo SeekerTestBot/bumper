@@ -5,8 +5,9 @@ on:
     inputs:
       tap:
       cask:
+      tag:
       livecheck:
-        default: true
+        default: false
 
 jobs:
   bump:
@@ -21,4 +22,5 @@ jobs:
           token: ${{secrets.TOKEN}}
           tap: ${{github.event.inputs.tap}}
           cask: ${{github.event.inputs.cask}}
+          tag: ${{github.event.inputs.tag}}
           livecheck: ${{github.event.inputs.livecheck}}
