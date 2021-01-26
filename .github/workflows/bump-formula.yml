@@ -5,6 +5,8 @@ on:
     inputs:
       tap:
       formula:
+      tag:
+      revision:
       livecheck:
         default: true
 
@@ -21,4 +23,6 @@ jobs:
           token: ${{secrets.TOKEN}}
           tap: ${{github.event.inputs.tap}}
           formula: ${{github.event.inputs.formula}}
+          tag: ${{github.event.inputs.tag}}
+          revision: ${{github.event.inputs.revision}}
           livecheck: ${{github.event.inputs.livecheck}}
