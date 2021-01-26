@@ -14,8 +14,17 @@ jobs:
   bump:
     runs-on: macos-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: Set up Homebrew
+        id: setup
+        uses: Homebrew/actions/setup-homebrew@master
+      - name: Cache gems
+        uses: actions/cache@v1
+        with:
+          path: ${{steps.setup.outputs.gems-path}}
+          key: ${{runner.os}}-rubygems-${{steps.setup.outputs.gems-hash}}
+          restore-keys: ${{runner.os}}-rubygems-
+      - name: Install gems
+        run: brew install-bundler-gems
       - name: Bump casks
         uses: SeekingMeaning/action-homebrew-bump-cask@master
         continue-on-error: true
