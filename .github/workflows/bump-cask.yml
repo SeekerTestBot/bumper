@@ -1,0 +1,24 @@
+name: Bump cask
+
+on:
+  workflow_dispatch:
+    inputs:
+      tap:
+      cask:
+      livecheck:
+        default: true
+
+jobs:
+  bump:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Bump casks
+        uses: SeekingMeaning/action-homebrew-bump-cask@master
+        continue-on-error: true
+        with:
+          token: ${{secrets.TOKEN}}
+          tap: ${{github.event.inputs.tap}}
+          cask: ${{github.event.inputs.cask}}
+          livecheck: ${{github.event.inputs.livecheck}}
