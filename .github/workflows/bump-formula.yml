@@ -11,6 +11,8 @@ on:
       url:
       tag:
       revision:
+      force:
+        default: false
       livecheck:
         default: true
 
@@ -27,6 +29,7 @@ jobs:
           url=${{github.event.inputs.url}}
           tag=${{github.event.inputs.tag}}
           revision=${{github.event.inputs.revision}}
+          force=${{github.event.inputs.force}}
           livecheck=${{github.event.inputs.livecheck}}
           EOS
 
@@ -71,6 +74,7 @@ jobs:
           url: ${{github.event.inputs.url}}
           tag: ${{github.event.inputs.tag}}
           revision: ${{github.event.inputs.revision}}
+          force: ${{github.event.inputs.force}}
           livecheck: ${{github.event.inputs.livecheck}}
 
       # Workaround until the `cache` action uses the changes from
