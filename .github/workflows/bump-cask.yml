@@ -59,7 +59,7 @@ jobs:
 
       - name: Bump casks
         uses: SeekingMeaning/action-homebrew-bump-cask@master
-        continue-on-error: true
+        continue-on-error: false
         with:
           token: ${{secrets.TOKEN}}
           tap: ${{github.event.inputs.tap}}
@@ -71,6 +71,7 @@ jobs:
       # Workaround until the `cache` action uses the changes from
       # https://github.com/actions/toolkit/pull/580.
       - name: Unlink workspace
+        if: always()
         run: |
           mv "${GITHUB_WORKSPACE}" "${GITHUB_WORKSPACE}-link"
           mkdir "${GITHUB_WORKSPACE}"
