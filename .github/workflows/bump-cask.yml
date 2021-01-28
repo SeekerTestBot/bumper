@@ -7,6 +7,8 @@ on:
         default: homebrew/cask
       cask:
       version:
+      force:
+        default: false
       livecheck:
         default: false
 
