@@ -7,6 +7,8 @@ on:
         default: homebrew/core
       formula:
         required: true
+      version:
+      url:
       tag:
       revision:
       livecheck:
@@ -57,12 +59,14 @@ jobs:
         run: brew install-bundler-gems
 
       - name: Bump formulae
-        uses: dawidd6/action-homebrew-bump-formula@v3
+        uses: SeekingMeaning/action-homebrew-bump-formula@dev
         continue-on-error: false
         with:
           token: ${{secrets.TOKEN}}
           tap: ${{github.event.inputs.tap}}
           formula: ${{github.event.inputs.formula}}
+          version: ${{github.event.inputs.version}}
+          url: ${{github.event.inputs.url}}
           tag: ${{github.event.inputs.tag}}
           revision: ${{github.event.inputs.revision}}
           livecheck: ${{github.event.inputs.livecheck}}
