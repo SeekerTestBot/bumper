@@ -18,11 +18,13 @@ jobs:
     steps:
       - name: ${{github.event.inputs.formula}} ${{github.event.inputs.tag}}
         run: |
-          echo tap=${{github.event.inputs.tap}}
-          echo formula=${{github.event.inputs.formula}}
-          echo tag=${{github.event.inputs.tag}}
-          echo revision=${{github.event.inputs.revision}}
-          echo livecheck=${{github.event.inputs.livecheck}}
+          cat <<-EOS
+          tap=${{github.event.inputs.tap}}
+          formula=${{github.event.inputs.formula}}
+          tag=${{github.event.inputs.tag}}
+          revision=${{github.event.inputs.revision}}
+          livecheck=${{github.event.inputs.livecheck}}
+          EOS
 
       - name: Set up Homebrew
         id: set-up-homebrew
