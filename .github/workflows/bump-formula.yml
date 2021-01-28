@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       tap:
+        default: homebrew/core
       formula:
+        required: true
       tag:
       revision:
       livecheck:
@@ -14,8 +16,44 @@ jobs:
   bump:
     runs-on: macos-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: ${{github.event.inputs.formula}} ${{github.event.inputs.tag}}
+        run: |
+          echo tap=${{github.event.inputs.tap}}
+          echo formula=${{github.event.inputs.formula}}
+          echo tag=${{github.event.inputs.tag}}
+          echo revision=${{github.event.inputs.revision}}
+          echo livecheck=${{github.event.inputs.livecheck}}
+
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      # Workaround until the `cache` action uses the changes from
+      # https://github.com/actions/toolkit/pull/580.
+      - name: Unlink workspace
+        run: |
+          mv "${GITHUB_WORKSPACE}" "${GITHUB_WORKSPACE}-link"
+          mkdir "${GITHUB_WORKSPACE}"
+
+      - name: Cache gems
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ${{steps.set-up-homebrew.outputs.gems-path}}
+          key: ${{runner.os}}-rubygems-v2-${{steps.set-up-homebrew.outputs.gems-hash}}
+          restore-keys: ${{runner.os}}-rubygems-v2-
+
+      # Workaround until the `cache` action uses the changes from
+      # https://github.com/actions/toolkit/pull/580.
+      - name: Re-link workspace
+        run: |
+          rmdir "${GITHUB_WORKSPACE}"
+          mv "${GITHUB_WORKSPACE}-link" "${GITHUB_WORKSPACE}"
+
+      - name: Install gems
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: brew install-bundler-gems
+
       - name: Bump formulae
         uses: dawidd6/action-homebrew-bump-formula@v3
         continue-on-error: true
@@ -26,3 +64,10 @@ jobs:
           tag: ${{github.event.inputs.tag}}
           revision: ${{github.event.inputs.revision}}
           livecheck: ${{github.event.inputs.livecheck}}
+
+      # Workaround until the `cache` action uses the changes from
+      # https://github.com/actions/toolkit/pull/580.
+      - name: Unlink workspace
+        run: |
+          mv "${GITHUB_WORKSPACE}" "${GITHUB_WORKSPACE}-link"
+          mkdir "${GITHUB_WORKSPACE}"
