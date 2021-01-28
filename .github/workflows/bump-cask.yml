@@ -40,7 +40,7 @@ jobs:
 
       - name: Cache gems
         id: cache
-        uses: actions/cache@v2
+        uses: pat-s/always-upload-cache@v2.1.3
         with:
           path: ${{steps.set-up-homebrew.outputs.gems-path}}
           key: ${{runner.os}}-rubygems-v2-${{steps.set-up-homebrew.outputs.gems-hash}}
