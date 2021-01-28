@@ -19,6 +19,8 @@ on:
 jobs:
   bump:
     runs-on: macos-latest
+    strategy:
+      fail-fast: false
     steps:
       - name: ${{github.event.inputs.formula}} ${{github.event.inputs.tag}}
         run: |
