@@ -23,6 +23,8 @@ jobs:
           cat <<-EOS
           tap=${{github.event.inputs.tap}}
           formula=${{github.event.inputs.formula}}
+          version=${{github.event.inputs.version}}
+          url=${{github.event.inputs.url}}
           tag=${{github.event.inputs.tag}}
           revision=${{github.event.inputs.revision}}
           livecheck=${{github.event.inputs.livecheck}}
