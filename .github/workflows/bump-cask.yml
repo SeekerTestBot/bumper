@@ -6,6 +6,7 @@ on:
       tap:
         default: homebrew/cask
       cask:
+        required: true
       version:
       force:
         default: false
@@ -16,6 +17,14 @@ jobs:
   bump:
     runs-on: macos-latest
     steps:
+      - name: ${{github.event.inputs.cask}} ${{github.event.inputs.version}}
+        run: |
+          echo tap=${{github.event.inputs.tap}}
+          echo cask=${{github.event.inputs.cask}}
+          echo version=${{github.event.inputs.version}}
+          echo force=${{github.event.inputs.force}}
+          echo livecheck=${{github.event.inputs.livecheck}}
+
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
