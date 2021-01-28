@@ -19,11 +19,13 @@ jobs:
     steps:
       - name: ${{github.event.inputs.cask}} ${{github.event.inputs.version}}
         run: |
-          echo tap=${{github.event.inputs.tap}}
-          echo cask=${{github.event.inputs.cask}}
-          echo version=${{github.event.inputs.version}}
-          echo force=${{github.event.inputs.force}}
-          echo livecheck=${{github.event.inputs.livecheck}}
+          cat <<-EOS
+          tap=${{github.event.inputs.tap}}
+          cask=${{github.event.inputs.cask}}
+          version=${{github.event.inputs.version}}
+          force=${{github.event.inputs.force}}
+          livecheck=${{github.event.inputs.livecheck}}
+          EOS
 
       - name: Set up Homebrew
         id: set-up-homebrew
