@@ -54,6 +54,7 @@ jobs:
           tap: ${{github.event.inputs.tap}}
           cask: ${{github.event.inputs.cask}}
           version: ${{github.event.inputs.version}}
+          force: ${{github.event.inputs.force}}
           livecheck: ${{github.event.inputs.livecheck}}
 
       # Workaround until the `cache` action uses the changes from
