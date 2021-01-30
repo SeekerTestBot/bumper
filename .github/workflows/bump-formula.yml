@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tap:
-        default: homebrew/core
+        # default: homebrew/core
       formula:
         required: true
       version:
@@ -62,6 +62,8 @@ jobs:
       - name: Install gems
         if: steps.cache.outputs.cache-hit != 'true'
         run: brew install-bundler-gems
+
+      - run: brew tap brewsci/bio
 
       - name: Bump formulae
         uses: SeekingMeaning/action-homebrew-bump-formula@dev
