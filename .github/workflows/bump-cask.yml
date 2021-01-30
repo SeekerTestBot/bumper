@@ -8,6 +8,7 @@ on:
       cask:
         required: true
       version:
+      url:
       force:
         default: false
       livecheck:
@@ -23,6 +24,7 @@ jobs:
           tap=${{github.event.inputs.tap}}
           cask=${{github.event.inputs.cask}}
           version=${{github.event.inputs.version}}
+          url=${{github.event.inputs.url}}
           force=${{github.event.inputs.force}}
           livecheck=${{github.event.inputs.livecheck}}
           EOS
@@ -65,6 +67,7 @@ jobs:
           tap: ${{github.event.inputs.tap}}
           cask: ${{github.event.inputs.cask}}
           version: ${{github.event.inputs.version}}
+          url: ${{github.event.inputs.url}}
           force: ${{github.event.inputs.force}}
           livecheck: ${{github.event.inputs.livecheck}}
 
