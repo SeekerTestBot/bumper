@@ -63,6 +63,8 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: brew install-bundler-gems
 
+      - run: brew install pipgrip
+
       - run: brew tap brewsci/bio
 
       - name: Bump formulae
